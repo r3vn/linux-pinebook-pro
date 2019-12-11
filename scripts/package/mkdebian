@@ -226,14 +226,16 @@ srctree ?= .
 build-indep:
 build-arch:
 	\$(MAKE) KERNELRELEASE=${version} ARCH=${ARCH} \
-	KBUILD_BUILD_VERSION=${revision} -f \$(srctree)/Makefile
+	KBUILD_BUILD_VERSION=${revision} KBUILD_IMAGE=${KBUILD_IMAGE} \
+	-f \$(srctree)/Makefile
 
 build: build-arch
 
 binary-indep:
 binary-arch: build-arch
 	\$(MAKE) KERNELRELEASE=${version} ARCH=${ARCH} \
-	KBUILD_BUILD_VERSION=${revision} -f \$(srctree)/Makefile intdeb-pkg
+	KBUILD_BUILD_VERSION=${revision} KBUILD_IMAGE=${KBUILD_IMAGE} \
+	-f \$(srctree)/Makefile intdeb-pkg
 
 clean:
 	rm -rf debian/*tmp debian/files
